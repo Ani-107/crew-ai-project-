@@ -45,6 +45,39 @@ graph TD
 
 ---
 
+## 📂 Project Deep Dive
+
+### 📄 [customer_support_ai.py](file:///d:/New%20folder%20(2)/customer_support_ai.py)
+This is the heart of the system. It defines the agents, tasks, and the crew orchestration logic.
+
+**Key Logic:**
+```python
+# Hierarchical Crew setup
+crew = Crew(
+    agents=[intent_agent, memory_agent, resolution_agent, risk_agent, evaluation_agent],
+    tasks=[intent_task, memory_task, resolution_task, risk_task, evaluation_task],
+    process=Process.hierarchical,
+    manager_llm=ChatOpenAI(model="gpt-3.5-turbo", temperature=0.3),
+    verbose=True
+)
+```
+
+### 🧪 [examples/test_scenarios.py](file:///d:/New%20folder%20(2)/examples/test_scenarios.py)
+An interactive CLI tool to test the system across various customer support scenarios including:
+- **Billing Issues**: Handling double charges and refund requests.
+- **Technical Support**: Login and account access problems.
+- **Account Management**: Subscription cancellations and modifications.
+- **Product Inquiries**: Slack integrations and feature availability.
+
+### 📋 [requirements.txt](file:///d:/New%20folder%20(2)/requirements.txt)
+Defines the technical stack:
+- `crewai`: Agent orchestration framework.
+- `langchain-openai`: LLM integration layer.
+- `crewai_tools`: Advanced tools for search and scrapers.
+- `python-dotenv`: Environment variable security.
+
+---
+
 ## 🚀 Getting Started
 
 ### 📋 Prerequisites
@@ -97,19 +130,6 @@ python examples/test_scenarios.py
 - **Tool Integration**: Equipped with `SerperDev` for real-time web research and `ScrapeWebsiteTool` for data extraction.
 - **Safety First**: Integrated risk assessment agent prevents common AI failures like hallucinations or policy drifting.
 - **Quality Feedback Loop**: Every response is quantitatively scored across three key metrics before final delivery.
-
----
-
-## 📂 Project Structure
-
-```text
-├── customer_support_ai.py   # Main agentic orchestration
-├── requirements.txt         # Project dependencies
-├── .env.example             # Environment template
-├── README.md                # Documentation
-└── examples/
-    └── test_scenarios.py    # Test suite for various intents
-```
 
 ---
 
