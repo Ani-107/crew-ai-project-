@@ -1,12 +1,12 @@
-# Environment variables
-.env
-
 # Python
 __pycache__/
 *.py[cod]
 *$py.class
 *.so
 .Python
+env/
+venv/
+ENV/
 build/
 develop-eggs/
 dist/
@@ -23,11 +23,10 @@ wheels/
 .installed.cfg
 *.egg
 
-# Virtual environments
-venv/
-env/
-ENV/
-.venv
+# Environment variables
+.env
+.env.local
+.env.*.local
 
 # IDE
 .vscode/
@@ -41,4 +40,14 @@ ENV/
 Thumbs.db
 
 # Logs
+logs/
 *.log
+
+# Temporary files
+*.tmp
+*.temp
+
+# CrewAI
+.crewai/
+
+

@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    
+    - name: Check Python syntax
+      run: |
+        python -m py_compile customer_support_ai.py
+        if [ -f "examples/test_scenarios.py" ]; then
+          python -m py_compile examples/test_scenarios.py
+        fi
+    
+    - name: Verify imports
+      run: |
+        python -c "import crewai; import langchain_openai; print('Imports successful')"
+      continue-on-error: true
+
